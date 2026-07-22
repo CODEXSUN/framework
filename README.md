@@ -17,3 +17,6 @@ npm run build
 ```
 
 Node.js 26 and npm 12 are the supported development baseline.
+
+Read `assist/AGENT-GUIDE.md` before changing Framework. The local Assist pack defines the
+infrastructure-only ownership boundary and repository release workflow.
