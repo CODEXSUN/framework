@@ -13,7 +13,17 @@ export async function runHealthChecks(checks: HealthCheck[]) {
   let status: HealthCheckResult["status"] = "ok";
 
   for (const check of checks) {
-    const result = await check.check();
+    let result: HealthCheckResult;
+    try {
+      result = await check.check();
+    } catch {
+      result = {
+        details: {
+          reason: "Health check execution failed"
+        },
+        status: "down"
+      };
+    }
     results[check.name] = result;
 
     if (result.status === "down") {

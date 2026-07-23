@@ -20,8 +20,9 @@ export function registerTenantContext(app: FastifyInstance, options?: TenantCont
   app.addHook("onRequest", async (request, reply) => {
     const tenantIdHeader = request.headers[headerName];
     if (typeof tenantIdHeader === "string" && tenantIdHeader.trim().length > 0) {
-      request.tenantId = tenantIdHeader;
-      reply.header("x-tenant-id", tenantIdHeader);
+      const tenantId = tenantIdHeader.trim();
+      request.tenantId = tenantId;
+      reply.header("x-tenant-id", tenantId);
     }
 
     const correlationHeader = request.headers["x-correlation-id"];

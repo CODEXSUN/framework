@@ -16,6 +16,10 @@ npm run check
 npm run build
 ```
 
+`npm run check` verifies formatting, lint, TypeScript, runtime behavior, public exports,
+package contents, dependency layout, and version alignment. Published packages are built
+automatically and checked to contain every runtime entry point.
+
 Node.js 26 and npm 12 are the supported development baseline.
 
 Read `assist/AGENT-GUIDE.md` before changing Framework. The local Assist pack defines the

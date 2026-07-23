@@ -68,12 +68,11 @@ function showMissingEnvBanner() {
   console.warn(`
 CODEXSUN environment file was not found.
 
-Create one before starting the app:
+Create the executable application's environment file before starting it:
   Copy-Item .env.example .env
-  npm run env:jwt-secret
 
-Then fill DB_MASTER_NAME, DB_USER, DB_PASSWORD, and JWT_SECRET in .env.
-Only fill DEFAULT_TENANT_* when ENABLE_DEFAULT_TENANT_SEED=1 for tests.
+Fill the values required by that application's environment schema.
+Set CODEXSUN_ALLOW_MISSING_ENV=1 only when the environment is supplied externally.
 `);
 }
 
@@ -81,10 +80,7 @@ function showInvalidEnvBanner() {
   console.error(`
 CODEXSUN environment is incomplete or invalid.
 
-Check .env and make sure database and JWT values are explicitly configured.
-Tenant/admin seed values are optional unless their seed flow is enabled.
-Start from:
-  Copy-Item .env.example .env
-  npm run env:jwt-secret
+Check the executable application's .env file against its environment schema.
+Framework validates the caller-provided schema and does not own product variables.
 `);
 }

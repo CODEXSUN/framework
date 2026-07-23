@@ -52,9 +52,19 @@ export function registerContractRoute<TSchemas extends RouteSchemas>(
         request
       } as ContractRouteContext<TSchemas>;
       const data = await options.handler(context);
-      const response = parsePart(options.schemas.response, data, "response");
+      const responseResult = options.schemas.response.safeParse(data);
+      if (!responseResult.success) {
+        request.log.error(
+          {
+            issues: responseResult.error.issues,
+            route: options.url
+          },
+          "Response contract validation failed"
+        );
+        throw new Error("Response contract validation failed");
+      }
 
-      return ok(response, {
+      return ok(responseResult.data, {
         requestId: request.id,
         ...(request.correlationId ? { correlationId: request.correlationId } : {}),
         ...(request.tenantId ? { tenantId: request.tenantId } : {})

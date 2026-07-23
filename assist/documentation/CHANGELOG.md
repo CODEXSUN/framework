@@ -2,9 +2,29 @@
 
 ## Version State
 
-Current version: 1.0.43
-Release tag: v-1.0.43
-Changelog label: v 1.0.43
+Current version: 1.0.44
+Release tag: v-1.0.44
+Changelog label: v 1.0.44
+
+## v-1.0.44
+
+### [v 1.0.44] 2026-07-23 9:25 am - Add queue V2 and package compatibility safeguards
+
+#### Database Changes
+
+- Database update: No.
+
+#### App Codebase Changes
+
+- Added backward-compatible Queue V2 contracts for backend health, durable receipts,
+  idempotency, delivery status, cancellation, retry, and guarded database/Redis switching.
+- Hardened HTTP response validation, health-check failure isolation, trimmed tenant context,
+  and executable-owned environment guidance.
+- Added runtime contract tests, public export checks, package-content checks, dependency-layout
+  validation, and isolated tarball installation with compilation and import of every public entry.
+- Added an explicit publish allowlist and prepack build so registry consumers receive all runtime
+  entry points.
+- Bumped repository version to 1.0.44.
 
 ## v-1.0.43
 
