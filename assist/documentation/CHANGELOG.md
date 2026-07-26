@@ -2,9 +2,23 @@
 
 ## Version State
 
-Current version: 1.0.45
-Release tag: v-1.0.45
-Changelog label: v 1.0.45
+Current version: 1.0.46
+Release tag: v-1.0.46
+Changelog label: v 1.0.46
+
+## v-1.0.46
+
+### [v 1.0.46] 2026-07-26 3:08 pm - Refresh Framework tooling dependencies
+
+#### Database Changes
+
+- Database update: No.
+
+#### App Codebase Changes
+
+- Refreshed the repository lint toolchain and package metadata while preserving Framework's public
+  runtime and contract exports.
+- Bumped repository version to 1.0.46.
 
 ## v-1.0.45
 
