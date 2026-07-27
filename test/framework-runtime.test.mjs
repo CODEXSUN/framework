@@ -80,6 +80,28 @@ test("tenant context trims the tenant header before echoing and enveloping it", 
   assert.equal(response.json().meta.tenantId, "tenant-1");
 });
 
+test("single-client APIs can disable tenant request context", async (t) => {
+  const app = await createApiApp({
+    appName: "framework-single-client-test",
+    cookieSecret,
+    corsOrigins: [],
+    environment: "development",
+    tenantContext: false
+  });
+  t.after(() => app.close());
+
+  const response = await app.inject({
+    headers: {
+      "x-tenant-id": "must-not-be-consumed"
+    },
+    method: "GET",
+    url: "/"
+  });
+
+  assert.equal(response.headers["x-tenant-id"], undefined);
+  assert.equal(response.json().meta.tenantId, undefined);
+});
+
 test("health checks continue after an exception and return a down envelope", async (t) => {
   const app = await createTestApp();
   t.after(() => app.close());

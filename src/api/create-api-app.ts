@@ -13,6 +13,7 @@ export type CreateApiAppOptions = {
   environment: string;
   onReady?: () => Promise<void> | void;
   shutdownHooks?: ShutdownHook[];
+  tenantContext?: boolean;
 };
 
 function requestMeta(request: { correlationId?: string; id: string; tenantId?: string }) {
@@ -46,8 +47,12 @@ export async function createApiApp(options: CreateApiAppOptions): Promise<Fastif
   });
   console.info("[plugin.ready] cookie");
 
-  registerTenantContext(app);
-  console.info("[context.ready] tenant");
+  if (options.tenantContext !== false) {
+    registerTenantContext(app);
+    console.info("[context.ready] tenant");
+  } else {
+    console.info("[context.ready] single-client");
+  }
 
   app.setErrorHandler((error, request, reply) => {
     console.error(

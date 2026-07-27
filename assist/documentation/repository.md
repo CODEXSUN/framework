@@ -45,6 +45,11 @@ Framework owns the environment loader, not product variables. `loadEnv()` resolv
 
 This repository exposes intentional public package contracts. The `codexsun` repository is the executable composition root. It may install, register, order, build, and invoke exported lifecycle functions; it must not copy this repository's business implementation.
 
+`createApiApp()` enables the optional tenant request context by default for backward compatibility.
+Single-client composition roots set `tenantContext: false`; this prevents `x-tenant-id` from being
+decorated, echoed, or added to response metadata while retaining the same Framework API bootstrap,
+HTTP envelopes, health, CORS, cookies, logging, and shutdown contracts.
+
 ## Package Contract
 
 Every declared package subpath must remain importable from the built package. The publish allowlist
