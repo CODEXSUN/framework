@@ -2,9 +2,23 @@
 
 ## Version State
 
-Current version: 1.0.46
-Release tag: v-1.0.46
-Changelog label: v 1.0.46
+Current version: 1.0.47
+Release tag: v-1.0.47
+Changelog label: v 1.0.47
+
+## v-1.0.47
+
+### [v 1.0.47] 2026-07-29 12:16 am - Harden API runtime middleware
+
+#### Database Changes
+
+- Database update: No.
+
+#### App Codebase Changes
+
+- Preserved caller-provided Fastify request, reply, and error hooks while applying CXApp runtime
+  middleware defaults, preventing composed applications from losing owner middleware.
+- Bumped repository version to 1.0.47.
 
 ## v-1.0.46
 

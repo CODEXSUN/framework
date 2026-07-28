@@ -12,6 +12,7 @@ export type CreateApiAppOptions = {
   corsOrigins: string[];
   environment: string;
   onReady?: () => Promise<void> | void;
+  registerRootRoute?: boolean;
   shutdownHooks?: ShutdownHook[];
   tenantContext?: boolean;
 };
@@ -100,15 +101,17 @@ export async function createApiApp(options: CreateApiAppOptions): Promise<Fastif
     registerShutdownHooks(app, options.shutdownHooks);
   }
 
-  app.get("/", async (request) =>
-    ok(
-      {
-        name: options.appName,
-        status: "ready"
-      },
-      requestMeta(request)
-    )
-  );
+  if (options.registerRootRoute !== false) {
+    app.get("/", async (request) =>
+      ok(
+        {
+          name: options.appName,
+          status: "ready"
+        },
+        requestMeta(request)
+      )
+    );
+  }
 
   return app;
 }
